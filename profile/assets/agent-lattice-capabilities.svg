@@ -1,0 +1,61 @@
+<svg width="1200" height="520" viewBox="0 0 1200 520" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Agent Lattice 产品能力地图</title>
+  <desc id="desc">能力包括 Agent 模板、会话生命周期、人机审批、实时事件、执行沙箱、数据自托管和可插拔执行器。</desc>
+  <defs>
+    <linearGradient id="card" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#F8FAFC"/>
+      <stop offset="1" stop-color="#ECFDF5"/>
+    </linearGradient>
+    <filter id="soft" x="0" y="0" width="1200" height="520" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="16" stdDeviation="22" flood-color="#0F172A" flood-opacity="0.10"/>
+    </filter>
+  </defs>
+  <rect width="1200" height="520" rx="26" fill="#F8FAFC"/>
+  <rect x="42" y="42" width="1116" height="436" rx="24" fill="#FFFFFF" stroke="#CBD5E1"/>
+  <text x="600" y="98" text-anchor="middle" fill="#0F172A" font-family="Inter, Arial, 'Microsoft YaHei', sans-serif" font-size="34" font-weight="800">从 Agent 创建到企业级运营的一体化能力</text>
+  <text x="600" y="134" text-anchor="middle" fill="#475569" font-family="Inter, Arial, 'Microsoft YaHei', sans-serif" font-size="18">模板 · 会话 · 审批 · 事件流 · 沙箱 · 自托管 · 多执行器</text>
+  <g filter="url(#soft)" font-family="Inter, Arial, 'Microsoft YaHei', sans-serif">
+    <g transform="translate(92 184)">
+      <rect width="300" height="112" rx="16" fill="url(#card)" stroke="#99F6E4"/>
+      <circle cx="48" cy="56" r="25" fill="#14B8A6"/>
+      <text x="48" y="65" text-anchor="middle" fill="#FFFFFF" font-size="24" font-weight="800">1</text>
+      <text x="88" y="48" fill="#0F172A" font-size="22" font-weight="750">Agent 模板</text>
+      <text x="88" y="78" fill="#475569" font-size="16">角色、工具、技能和规则复用</text>
+    </g>
+    <g transform="translate(450 184)">
+      <rect width="300" height="112" rx="16" fill="url(#card)" stroke="#BFDBFE"/>
+      <circle cx="48" cy="56" r="25" fill="#2563EB"/>
+      <text x="48" y="65" text-anchor="middle" fill="#FFFFFF" font-size="24" font-weight="800">2</text>
+      <text x="88" y="48" fill="#0F172A" font-size="22" font-weight="750">会话生命周期</text>
+      <text x="88" y="78" fill="#475569" font-size="16">运行、等待、继续、归档可追踪</text>
+    </g>
+    <g transform="translate(808 184)">
+      <rect width="300" height="112" rx="16" fill="url(#card)" stroke="#FDE68A"/>
+      <circle cx="48" cy="56" r="25" fill="#D97706"/>
+      <text x="48" y="65" text-anchor="middle" fill="#FFFFFF" font-size="24" font-weight="800">3</text>
+      <text x="88" y="48" fill="#0F172A" font-size="22" font-weight="750">人机审批</text>
+      <text x="88" y="78" fill="#475569" font-size="16">高风险动作先确认再执行</text>
+    </g>
+    <g transform="translate(92 330)">
+      <rect width="300" height="112" rx="16" fill="url(#card)" stroke="#C4B5FD"/>
+      <circle cx="48" cy="56" r="25" fill="#7C3AED"/>
+      <text x="48" y="65" text-anchor="middle" fill="#FFFFFF" font-size="24" font-weight="800">4</text>
+      <text x="88" y="48" fill="#0F172A" font-size="22" font-weight="750">实时事件流</text>
+      <text x="88" y="78" fill="#475569" font-size="16">对话、工具、日志和状态同步</text>
+    </g>
+    <g transform="translate(450 330)">
+      <rect width="300" height="112" rx="16" fill="url(#card)" stroke="#FDA4AF"/>
+      <circle cx="48" cy="56" r="25" fill="#E11D48"/>
+      <text x="48" y="65" text-anchor="middle" fill="#FFFFFF" font-size="24" font-weight="800">5</text>
+      <text x="88" y="48" fill="#0F172A" font-size="22" font-weight="750">沙箱执行</text>
+      <text x="88" y="78" fill="#475569" font-size="16">Worker 隔离工具、文件和环境</text>
+    </g>
+    <g transform="translate(808 330)">
+      <rect width="300" height="112" rx="16" fill="url(#card)" stroke="#86EFAC"/>
+      <circle cx="48" cy="56" r="25" fill="#16A34A"/>
+      <text x="48" y="65" text-anchor="middle" fill="#FFFFFF" font-size="24" font-weight="800">6</text>
+      <text x="88" y="48" fill="#0F172A" font-size="22" font-weight="750">自托管数据</text>
+      <text x="88" y="78" fill="#475569" font-size="16">上下文、文件和配置由你掌控</text>
+    </g>
+  </g>
+</svg>

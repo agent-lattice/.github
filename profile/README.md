@@ -1,135 +1,98 @@
 <div align="center">
 
-# ⬡ Agent Lattice
+![Agent Lattice 自托管 AI Agent 平台：统一管理 Agent、会话、审批、沙箱与多模型执行器](./assets/agent-lattice-hero.svg)
 
-**开源 Agent 配置底座 · 自托管 · 内核可替换**
+# Agent Lattice
 
-为不同类型的应用提供 Agent 定制、运行托管和统一协议支撑
+**开源自托管 AI Agent 平台 · Agent 管理系统 · 可插拔执行器 · 企业级人机协作底座**
 
-[🌐 官网](https://agent-lattice.cn) · [🎮 Demo](https://demo.agent-lattice.cn) · [📖 文档](https://github.com/agent-lattice/agent-lattice/tree/main/docs) · [💬 讨论](https://github.com/agent-lattice/.github/discussions)
+面向 Claude、OpenAI、Gemini、开源模型或自研执行器等多种 Agent Runtime，统一管理 Agent 模板、用户空间、会话状态、工具调用、审批流程与运行沙箱。
+
+[官网](https://agent-lattice.cn) · [在线 Demo](https://demo.agent-lattice.cn) · [项目文档](https://github.com/agent-lattice/agent-lattice/tree/main/docs) · [GitHub 讨论](https://github.com/agent-lattice/.github/discussions)
 
 </div>
 
 ---
 
-## 为什么需要 Agent Lattice？
+## 一个可嵌入你产品的 Agent 基础设施
 
-当你把 Agent 嵌入自己的产品时，会立刻面对这些问题：
+Agent Lattice 是面向 AI Agent 应用、企业内部 Copilot、研发自动化平台和私有化智能助手的开源 Agent 管理平台。它提供一套自托管、可扩展、可替换内核的 Agent 基础设施，让团队不用从零搭建会话管理、权限隔离、任务审批、文件上下文、执行沙箱和实时交互能力。
 
-> 🤔 **每次换一个 Agent 内核，前端就要重写一遍？**
-> 🤔 **Agent 的状态、会话、文件散落各处，无法统一管理？**
-> 🤔 **想要自托管，却发现只能用云上的 Managed 服务？**
-> 🤔 **多租户隔离、凭证安全、审批流程——从零搭建太痛苦？**
+如果你正在建设这些场景，Agent Lattice 可以作为产品底座：
 
-**Agent Lattice 把这些都变成底座能力**——你只需要关注业务逻辑，基础设施由平台接管。
-
----
-
-## 三平面架构
-
-```
-┌──────────────────────────────────────────────────────────┐
-│                                                          │
-│   交互平面  agent-lattice-manager-ui                      │
-│   ┌──────────────────────────────────────────┐            │
-│   │  AgentShell · ChatPane · Composer        │            │
-│   │  ApprovalDialog · ToolTimeline · Files   │            │
-│   │         ↕ 统一 Agent UI 协议 ↕           │            │
-│   └──────────────────────────────────────────┘            │
-│                          │                                │
-│                          │ SSE + REST                     │
-│                          ▼                                │
-│   控制平面  agent-gateway                                │
-│   ┌──────────────────────────────────────────┐            │
-│   │  会话路由 · 事件转换 · Worker 调度       │            │
-│   │  文件读写 · SSE 推送 · 审批代理          │            │
-│   │         ↕ RuntimeProvider 合同 ↕         │            │
-│   └──────────────────────────────────────────┘            │
-│                          │                                │
-│                          │ mounts + env + lifecycle       │
-│                          ▼                                │
-│   执行平面  Worker Provider                               │
-│   ┌──────────────────────────────────────────┐            │
-│   │  Docker Sandbox · 阿里云 FC · AWS Lambda │            │
-│   │  按需拉起 · 执行任务 · 自动回收          │            │
-│   └──────────────────────────────────────────┘            │
-│                                                          │
-└──────────────────────────────────────────────────────────┘
-```
-
-**前端消费的是协议，不是执行器。** 更换 Agent 内核，前端零改动。
+| 场景 | Agent Lattice 提供什么 |
+|:--|:--|
+| **企业内部 AI 助手** | 用户隔离、数据自控、操作审批、私有化部署 |
+| **研发 Agent 平台** | 沙箱执行、文件变更追踪、终端输出、任务生命周期管理 |
+| **SaaS 产品内嵌 Agent** | 统一 Agent UI 协议、可复用管理界面、可插拔执行器 |
+| **多模型 Agent 实验平台** | 前端不变，后端执行器可切换，降低模型和供应商绑定 |
 
 ---
 
-## 四条设计原则
+## 为什么选择 Agent Lattice？
 
-| 原则 | 含义 |
-|:-----|:-----|
-| **状态落盘，服务轻量** | 会话、历史、工具、审批全部写入用户目录，Gateway 不依赖重数据库，重启即可恢复 |
-| **协议统一，内核可替换** | 前端只认 Agent UI 协议（12 种事件类型），后端 Provider 可替换 |
-| **运行时容器化，调度集中在网关** | Worker 按需拉起、自动回收，不是常驻服务 |
-| **单机先可用，后续可演进多租** | 用户目录隔离 → 容器隔离 → 多租部署，平滑演进 |
+很多团队在把 AI Agent 接入真实产品时，会很快遇到同一组问题：
+
+| 常见阻碍 | Agent Lattice 的解法 |
+|:--|:--|
+| Agent 内核一换，前端和业务流程就要重写 | 用统一 Agent UI 协议隔离产品界面与后端执行器 |
+| 对话、文件、工具调用和审批状态分散在不同系统 | 用 Gateway 统一调度会话、状态、事件流和用户空间 |
+| 只想私有化部署，但托管服务无法满足数据合规要求 | 支持自托管部署，数据留在你自己的服务器和存储中 |
+| 高风险操作缺少人类确认机制 | 内置人机审批流程，让 Agent 在关键节点暂停等待确认 |
+| 多用户、多项目、多 Agent 难以管理 | 通过模板、空间和生命周期管理形成标准化运营能力 |
 
 ---
 
-## 核心能力
+## 产品能力
+
+![Agent Lattice 产品能力地图：模板、会话、审批、沙箱、实时事件和自托管部署](./assets/agent-lattice-capabilities.svg)
 
 <table>
 <tr>
 <td width="50%">
 
-### 🧩 Agent 模板管理
+### Agent 模板化管理
 
-从 `agent-spec` 模板一键创建用户实例——
-`CLAUDE.md`、`settings.json`、`rules/`、`skills/`、`commands/`
-自动分发到每个用户的独立目录
+把角色设定、系统提示词、工具权限、技能配置和运行规则沉淀为模板。不同用户或项目可以从模板创建独立 Agent 实例，既复用标准能力，也保留隔离空间。
 
 </td>
 <td width="50%">
 
-### 🔄 会话生命周期
+### 会话与生命周期管理
 
-`idle → busy → waiting_approval → archived → stopped`
-五种状态完整覆盖，每次执行都有 durable event log
+统一追踪 Agent 从创建、运行、等待审批、继续执行到归档的完整过程。对话历史、工具调用、终端输出和文件变更都可以被管理和回放。
 
 </td>
 </tr>
 <tr>
 <td width="50%">
 
-### 🛡️ 审批交互
+### 人机协作审批
 
-Agent 执行高风险操作时自动暂停，
-等待人类确认后才继续——
-`approval.requested → approval.resolved`
+当 Agent 准备执行敏感操作、修改关键文件或调用高风险工具时，平台可以暂停任务，等待人类确认后再继续，适合企业安全和研发流程。
 
 </td>
 <td width="50%">
 
-### 📁 文件系统为主真相源
+### 实时交互体验
 
-用户项目、Claude Home、运行态投影三层目录结构，
-所有状态均可从文件恢复，无需数据库
+对话流、工具执行、日志输出、状态变化和审批请求通过统一事件流推送到界面，让 Agent 的执行过程可见、可控、可追踪。
 
 </td>
 </tr>
 <tr>
 <td width="50%">
 
-### 🌊 SSE 实时事件流
+### 可插拔 Agent 执行器
 
-12 种统一事件类型——
-`run` / `message` / `tool` / `terminal` / `artifact` / `approval` / `state` / `error`
-前端一套订阅逻辑覆盖全部场景
+平台面向可替换执行器设计，可以逐步接入 Claude、OpenAI、Gemini、本地开源模型、自研 Agent Runtime 或云函数 Worker，减少对单一供应商的依赖。
 
 </td>
 <td width="50%">
 
-### 🔌 RuntimeProvider 可插拔
+### 自托管与数据自主
 
-Docker · 阿里云 FC · AWS Lambda
-三段式 Launch Spec (`mounts + env + lifecycle`)，
-新增运行时只需实现一个 Protocol
+Agent Lattice 可以部署在你自己的基础设施中。对话、上下文、文件和配置由你管理，便于满足私有化、审计、合规和成本控制需求。
 
 </td>
 </tr>
@@ -137,113 +100,96 @@ Docker · 阿里云 FC · AWS Lambda
 
 ---
 
-## 资源模型
+## 架构概览
 
-```
-user ──┬── agent ──┬── session (idle / busy / waiting_approval / archived / stopped)
-       │           ├── run       (单轮执行)
-       │           └── messages  (多轮上下文执行)
-       │
-       ├── project ── agent ── session ── run / messages
-       │              (与 user 模式同构)
-       │
-       ├── agent-spec ──→ 用户实例 (模板分发)
-       │
-       └── WebDAV ──→ 项目文件 / Claude Home / agent-spec
-```
+![Agent Lattice 架构图：Manager UI、Agent Gateway、Worker 沙箱和可插拔执行器](./assets/agent-lattice-architecture.svg)
+
+Agent Lattice 将 AI Agent 平台拆成三层：
+
+| 层级 | 组件 | 作用 |
+|:--|:--|:--|
+| **交互层** | Manager UI | 提供对话、审批、文件、工具调用和 Agent 管理界面 |
+| **控制层** | Agent Gateway | 负责用户空间、会话调度、状态追踪、模板分发和事件流 |
+| **执行层** | Worker / Sandbox | 运行具体 Agent 内核，隔离工具、文件系统、凭证和执行环境 |
+
+你的产品只需要对接统一协议，不需要把业务代码绑定到某个具体模型、CLI 或 Agent Runtime。
 
 ---
 
-## 组件一览
+## 适合谁使用？
 
-| 组件 | 语言 | 定位 |
-|:-----|:-----|:-----|
-| **agent-gateway** | Python · FastAPI | 控制平面：路由、调度、事件转换、文件读写 |
-| **agent-lattice-manager-ui** | TypeScript · React · Next.js | 交互平面：14 个组件 + 5 个 Hooks + 2 个 Providers |
-| **claude-agent-sanbox-worker** | Python · Docker | 执行平面：沙箱化 Agent 运行环境 |
+- **AI 产品团队**：想在现有 SaaS、CRM、DevTool 或内部系统中嵌入 Agent 能力。
+- **企业 IT / 平台工程团队**：需要私有化部署、权限隔离、审计追踪和数据自主。
+- **研发效能团队**：希望把代码 Agent、运维 Agent、文档 Agent 纳入统一管理。
+- **Agent 创业团队**：想快速搭建可运营的 Agent 平台，而不是只做一个聊天窗口。
 
-**前端组件库**可直接嵌入你的产品：
-`AgentShell · HeaderBar · SessionSidebar · ChatPane · MessageList · Composer · ToolTimeline · ToolCallCard · ApprovalDialog · AgentProjectTree · FileViewer · DiffViewer · TerminalPanel · EmptyState`
+---
+
+## 与托管 Agent 服务的区别
+
+| 对比项 | 常见托管 Agent 服务 | Agent Lattice |
+|:--|:--|:--|
+| **部署方式** | 主要运行在服务商云端 | 自托管，部署位置由你决定 |
+| **数据归属** | 会话和上下文通常进入第三方平台 | 数据留在自己的服务器和存储中 |
+| **Agent 内核** | 常绑定固定模型或固定 Runtime | 可插拔执行器，降低供应商锁定 |
+| **产品集成** | 更偏独立工具或托管控制台 | 可作为业务产品内的 Agent 底座 |
+| **审批流程** | 可定制空间有限 | 面向人机协作和高风险操作确认设计 |
+| **运行环境** | 通常不可控 | Docker、本地服务、云函数或自定义 Worker |
+| **开源属性** | 多数闭源 | 开源，便于审计、二次开发和私有化交付 |
+
+---
+
+## 技术栈
+
+| 模块 | 技术 |
+|:--|:--|
+| **后端** | Python, FastAPI |
+| **前端** | React, Next.js, TypeScript, shadcn/ui, Tailwind CSS |
+| **运行时** | Docker, Worker Provider, Serverless Runtime |
+| **存储** | 文件系统优先，可扩展到数据库和对象存储 |
+| **协议** | 统一 Agent UI 事件协议，可对接多种 Agent Runtime |
 
 ---
 
 ## 快速开始
 
 ```bash
-# 克隆项目
 git clone https://github.com/agent-lattice/agent-lattice.git
 cd agent-lattice
-
-# 开发环境一键启动
 make dev-up
-
-# 访问
-# Gateway API:  http://localhost:8000
-# Manager UI:   http://localhost:3177
 ```
 
-或直接体验在线 Demo：[demo.agent-lattice.cn](https://demo.agent-lattice.cn)
+也可以直接访问在线体验环境：
+
+[demo.agent-lattice.cn](https://demo.agent-lattice.cn)
 
 ---
 
-## 演进路线
+## 路线图
 
-```
-Phase 0 ━━▶ 目录与资源模型收敛         ✅ 已落地
-Phase 1 ━━▶ Durable Session Log       🚧 设计完成
-Phase 2 ━━▶ Harness 外置化            📋 规划中
-Phase 3 ━━▶ Sandbox 标准化            📋 规划中
-Phase 4 ━━▶ 凭证 Broker / Vault       📋 规划中
-Phase 5 ━━▶ Session Replay & Recovery 📋 规划中
-Phase 6 ━━▶ Many Brains / Many Hands  📋 规划中
-```
+| 状态 | 方向 |
+|:--|:--|
+| 已落地 | Agent 模板、用户管理、基础 Manager UI、Gateway 调度框架 |
+| 进行中 | 会话持久化、任务回放、审批体验优化、Worker Provider 抽象 |
+| 规划中 | 安全沙箱标准化、凭证代理、多 Agent 协同编排、企业级审计 |
 
 ---
 
-## 与 Managed Claude CLI 的对比
+## 参与项目
 
-| | Managed Claude CLI | Agent Lattice |
-|:--|:------------------|:--------------|
-| **部署** | 云托管 | 自托管 |
-| **数据归属** | 云端存储 | 本地文件系统，完全可控 |
-| **内核** | Claude 专属 | 可替换任何 Agent Provider |
-| **前端** | 官方 CLI | 可嵌入组件库，定制你的 UI |
-| **运行时** | 固定 | Docker / Serverless / 自定义 |
-| **审批流** | 内置 | 可定制，通过 SSE 实时推送 |
-| **开源** | ❌ | ✅ MIT |
+Agent Lattice 正在持续迭代，欢迎产品反馈、场景讨论、文档补充和代码贡献。
 
----
-
-## 技术栈
-
-```
-后端   Python 3.12+ · FastAPI · Pydantic · SSE
-前端   React 19 · Next.js 15 · TypeScript 5.8 · shadcn/ui · Tailwind 4
-构建   Turborepo · pnpm Workspace
-容器   Docker · Docker Compose
-存储   文件系统（可扩展至数据库）
-部署   Docker · 阿里云 FC · AWS Lambda
-```
-
----
-
-## 贡献
-
-我们欢迎各种形式的贡献！
-
-- **Bug / Feature** → [Issues](https://github.com/agent-lattice/.github/issues)
-- **想法 / 反馈** → [Discussions](https://github.com/agent-lattice/.github/discussions)
-- **代码** → Fork → Branch → PR
-- **文档** → 帮助改进 `docs/` 下的设计文档
+- 提交问题或功能建议：[GitHub Issues](https://github.com/agent-lattice/.github/issues)
+- 分享使用场景和想法：[GitHub Discussions](https://github.com/agent-lattice/.github/discussions)
+- 贡献代码：Fork 项目，创建分支并提交 Pull Request
+- 了解更多：[agent-lattice.cn](https://agent-lattice.cn)
 
 ---
 
 <div align="center">
 
-**⬡ Agent Lattice** — Agent 的底座，不是 Agent 本身
+**Agent Lattice：让 AI Agent 成为你产品的一部分，而不是把你的产品交给某个 Agent。**
 
-让 Agent 嵌入你的产品，而不是让你的产品围绕某个 Agent
-
-[MIT License](./LICENSE) · Made with ❤️ by the community
+[MIT License](https://github.com/agent-lattice/agent-lattice/blob/main/LICENSE)
 
 </div>
