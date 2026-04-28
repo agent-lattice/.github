@@ -1,12 +1,12 @@
 <div align="center">
 
-![Agent Lattice 自托管 AI Agent 平台：统一管理 Agent、会话、审批、沙箱与多模型执行器](./assets/agent-lattice-hero.svg)
+![Agent Lattice 自托管 Managed Agent 平台：基于 Claude Code、Codex 等顶尖 Agent 框架，统一管理会话、审批、沙箱与私有化部署](./assets/agent-lattice-hero.svg)
 
 # Agent Lattice
 
-**开源自托管 AI Agent 平台 · Agent 管理系统 · 可插拔执行器 · 企业级人机协作底座**
+**Claude 官方 Managed Agent 的开源私有化版本 · 基于 Claude Code / Codex 等一流 Agent 框架装配**
 
-面向 Claude、OpenAI、Gemini、开源模型或自研执行器等多种 Agent Runtime，统一管理 Agent 模板、用户空间、会话状态、工具调用、审批流程与运行沙箱。
+Agent Lattice 不从零自研 Agent harness，也不把核心价值押在脆弱的 prompt loop 调优上。它把 Claude Code、OpenAI Codex 等成熟 Agent 框架装配成可私有化交付的平台，统一管理 Agent 模板、用户空间、会话状态、工具调用、审批流程与运行沙箱。
 
 [官网](https://agent-lattice.cn) · [在线 Demo](https://demo.agent-lattice.cn) · [项目文档](https://github.com/agent-lattice/agent-lattice/tree/main/docs) · [GitHub 讨论](https://github.com/agent-lattice/.github/discussions)
 
@@ -14,18 +14,36 @@
 
 ---
 
-## 一个可嵌入你产品的 Agent 基础设施
+## Managed Agent 的私有化版本
 
-Agent Lattice 是面向 AI Agent 应用、企业内部 Copilot、研发自动化平台和私有化智能助手的开源 Agent 管理平台。它提供一套自托管、可扩展、可替换内核的 Agent 基础设施，让团队不用从零搭建会话管理、权限隔离、任务审批、文件上下文、执行沙箱和实时交互能力。
+Claude 官方 Managed Agent / Claude Code 展示了代码 Agent 的理想体验：强模型、成熟工具调用、真实工程上下文和长任务执行。但很多团队在企业落地时，还需要私有化部署、数据自控、用户隔离、审批流、审计追踪和可嵌入自有产品的管理界面。
 
-如果你正在建设这些场景，Agent Lattice 可以作为产品底座：
+Agent Lattice 的定位就是 **Managed Agent 的私有化版本**：保留 Claude Code、Codex 这类顶尖 Agent 框架的能力，把托管服务体验迁移到你自己的基础设施里。
 
-| 场景 | Agent Lattice 提供什么 |
+它适合替代或补齐云上 Managed Agent 无法覆盖的企业需求：
+
+| 需求 | Agent Lattice 提供什么 |
 |:--|:--|
-| **企业内部 AI 助手** | 用户隔离、数据自控、操作审批、私有化部署 |
-| **研发 Agent 平台** | 沙箱执行、文件变更追踪、终端输出、任务生命周期管理 |
-| **SaaS 产品内嵌 Agent** | 统一 Agent UI 协议、可复用管理界面、可插拔执行器 |
-| **多模型 Agent 实验平台** | 前端不变，后端执行器可切换，降低模型和供应商绑定 |
+| **Managed Agent 私有化版本** | 在自有服务器上托管 Agent 会话、文件、审批和运行环境 |
+| **顶尖 Agent 框架装配** | 优先复用 Claude Code、Codex 等成熟 Agent Runtime，而不是重新造 harness |
+| **企业内部 AI 助手** | 用户隔离、数据自控、操作审批、审计追踪和私有化部署 |
+| **研发 Agent 平台** | 沙箱执行、文件变更追踪、终端输出和任务生命周期管理 |
+| **产品内嵌 Agent** | 统一 Agent UI 协议、可复用管理界面、可插拔执行器 |
+
+---
+
+## 为什么不是自己调一个 harness？
+
+真正难的不是写一个能调用工具的循环，而是让 Agent 在真实业务里稳定运行、可观察、可暂停、可恢复、可审计、可交付。
+
+Agent Lattice 的选择是：**把 Agent 智能交给一流框架，把企业级装配交给平台。**
+
+| 自研 harness 的问题 | Agent Lattice 的思路 |
+|:--|:--|
+| Prompt loop、工具选择、上下文压缩需要长期调优 | 优先基于 Claude Code、Codex 等成熟 Agent 框架，复用它们的工程能力 |
+| Demo 能跑，企业交付还缺会话、权限、审批和审计 | Gateway 负责会话调度、状态追踪、用户空间和审批流程 |
+| 每接一个 Agent 内核，前端和流程都要重做 | 用统一 Agent UI 协议隔离产品界面与执行器 |
+| 单机脚本难以支撑多用户、多项目和长任务 | 用模板、Worker、沙箱和生命周期管理形成平台化能力 |
 
 ---
 
@@ -85,7 +103,7 @@ Agent Lattice 是面向 AI Agent 应用、企业内部 Copilot、研发自动化
 
 ### 可插拔 Agent 执行器
 
-平台面向可替换执行器设计，可以逐步接入 Claude、OpenAI、Gemini、本地开源模型、自研 Agent Runtime 或云函数 Worker，减少对单一供应商的依赖。
+平台面向可替换执行器设计，优先装配 Claude Code、OpenAI Codex 等一流 Agent 框架，也可以逐步接入 Gemini、本地开源模型、自研 Agent Runtime 或云函数 Worker，减少对单一供应商和单一运行环境的依赖。
 
 </td>
 <td width="50%">
@@ -112,7 +130,7 @@ Agent Lattice 将 AI Agent 平台拆成三层：
 | **控制层** | Agent Gateway | 负责用户空间、会话调度、状态追踪、模板分发和事件流 |
 | **执行层** | Worker / Sandbox | 运行具体 Agent 内核，隔离工具、文件系统、凭证和执行环境 |
 
-你的产品只需要对接统一协议，不需要把业务代码绑定到某个具体模型、CLI 或 Agent Runtime。
+你的产品只需要对接统一协议，不需要把业务代码绑定到某个具体模型、CLI 或 Agent Runtime。Agent Lattice 负责装配、调度、隔离和审计，底层 Agent 能力可以持续跟随 Claude Code、Codex 等一线框架演进。
 
 ---
 
@@ -125,13 +143,15 @@ Agent Lattice 将 AI Agent 平台拆成三层：
 
 ---
 
-## 与托管 Agent 服务的区别
+## 与 Claude 官方 Managed Agent 的区别
 
-| 对比项 | 常见托管 Agent 服务 | Agent Lattice |
+| 对比项 | Claude 官方 Managed Agent / 云上托管体验 | Agent Lattice |
 |:--|:--|:--|
+| **核心体验** | 由官方提供成熟 Agent 体验 | Managed Agent 的私有化版本，并提供企业装配层 |
 | **部署方式** | 主要运行在服务商云端 | 自托管，部署位置由你决定 |
-| **数据归属** | 会话和上下文通常进入第三方平台 | 数据留在自己的服务器和存储中 |
-| **Agent 内核** | 常绑定固定模型或固定 Runtime | 可插拔执行器，降低供应商锁定 |
+| **数据归属** | 会话、上下文和文件通常进入第三方平台 | 数据留在自己的服务器和存储中 |
+| **Agent 内核** | 强绑定官方 Runtime | 可插拔执行器，可装配 Claude Code、Codex 或自研 Runtime |
+| **Harness 策略** | 官方托管，黑盒能力强 | 不重造底层 harness，复用一流 Agent 框架并补齐平台能力 |
 | **产品集成** | 更偏独立工具或托管控制台 | 可作为业务产品内的 Agent 底座 |
 | **审批流程** | 可定制空间有限 | 面向人机协作和高风险操作确认设计 |
 | **运行环境** | 通常不可控 | Docker、本地服务、云函数或自定义 Worker |
@@ -147,6 +167,7 @@ Agent Lattice 将 AI Agent 平台拆成三层：
 | **前端** | React, Next.js, TypeScript, shadcn/ui, Tailwind CSS |
 | **运行时** | Docker, Worker Provider, Serverless Runtime |
 | **存储** | 文件系统优先，可扩展到数据库和对象存储 |
+| **Agent Runtime** | Claude Code, OpenAI Codex, 可插拔自定义执行器 |
 | **协议** | 统一 Agent UI 事件协议，可对接多种 Agent Runtime |
 
 ---
